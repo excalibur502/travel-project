@@ -229,8 +229,8 @@ export default {
       // 跳转
       if (valid) {
         this.$router.push({
-          path: "/airs/flights",
-          query: this.form
+          path: "/air/flights",
+          query: this.airForm
         });
       }
     }
