@@ -228,6 +228,9 @@ export default {
 
       // 跳转
       if (valid) {
+        const airs = JSON.parse(localStorage.getItem('airs') || `[]`);
+        airs.unshift(this.airForm);
+        localStorage.setItem('airs',JSON.stringify(airs)); 
         this.$router.push({
           path: "/air/flights",
           query: this.airForm

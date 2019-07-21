@@ -64,9 +64,8 @@ export default {
   },
   methods: {
     handleSendCaptcha() {
-        const phonenum = this.form.username;
-      if (!phonenum.trim()) {
-        console.log(111);
+        const phonenum = this.form.username.trim();
+      if (!phonenum) {
         this.$confirm("手机号不能为空", "提示", {
           confirmButtonText: "确定",
           showCancelButton: false,
@@ -74,8 +73,7 @@ export default {
         });
         return;
       }
-      if (phonenum.trim().length !== 11) {
-        console.log(222);
+      if (phonenum.length !== 11) {
         this.$confirm("手机号格式不正确", "提示", {
           confirmButtonText: "确定",
           showCancelButton: false,
@@ -106,21 +104,29 @@ export default {
         if (valid) {
         const {repassword,...props} = this.form;
         // console.log(props,'props');
-          this.$axios({
-            url: "/accounts/register",
-            method: "POST",
-            data:props
-          }).then(res => {
-            // console.log(res,'res');
-            if (res.status === 200) {
-                this.$store.commit('user/setUserInfo',res.data);
-                this.$router.back();
-            }
-          }).catch(err => {
-              console.log(err,'err')
-          })
+        this.$store.dispatch('user/register',props)
+        .then(res => {
+          // 此处有bug，并没有验证注册是否成功，调用action成功时就会调用，登录页同理
+            this.$message.success("注册成功，正在为您登录跳转...");
+          
+        })
+
+
+        //   this.$axios({
+        //     url: "/accounts/register",
+        //     method: "POST",
+        //     data:props
+        //   }).then(res => {
+        //     // console.log(res,'res');
+        //     if (res.status === 200) {
+        //         this.$store.commit('user/setUserInfo',res.data);
+        //         this.$router.back();
+        //     }
+        //   }).catch(err => {
+        //       console.log(err,'err')
+        //   })
         }else{
-            this.$message.warning('用户信息有误，请重新检查')
+            this.$message.warning('用户信息填写有误，请重新检查')
         }
       });
     }

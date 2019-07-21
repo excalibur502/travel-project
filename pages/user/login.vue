@@ -38,7 +38,7 @@ export default {
     },
     data(){
         return {
-            currentTab: 1
+            currentTab: 0
         }
     },
     methods: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="Sizer">
+  <div class="flight-sizer">
     <el-row type="flex" class="filters-top" align="middle" justify='space-between'>
       <el-col :span="8">
         <span>单程：{{data.info.departCity}} - {{data.info.destCity}} / {{data.info.departDate}}</span>
@@ -102,7 +102,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.Sizer{
+.flight-sizer{
     .filters-top{
         margin-bottom: 10px;
         /deep/ .el-select{
